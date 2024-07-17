@@ -5,13 +5,13 @@ provider "azurerm" {
 
 # Create a Resource Group if it doesn’t exist
 resource "azurerm_resource_group" "tfexample" {
-  name     = "my-terraform-rg"
+  name     = "bala-terraform-rg"
   location = "West Europe"
 }
 
 # Create a Virtual Network
 resource "azurerm_virtual_network" "tfexample" {
-  name                = "my-terraform-vnet"
+  name                = "bala-terraform-vnet"
   location            = azurerm_resource_group.tfexample.location
   resource_group_name = azurerm_resource_group.tfexample.name
   address_space       = ["10.0.0.0/16"]
@@ -19,7 +19,7 @@ resource "azurerm_virtual_network" "tfexample" {
 
 # Create a Subnet in the Virtual Network
 resource "azurerm_subnet" "tfexample" {
-  name                 = "my-terraform-subnet"
+  name                 = "bala-terraform-subnet"
   resource_group_name  = azurerm_resource_group.tfexample.name
   virtual_network_name = azurerm_virtual_network.tfexample.name
   address_prefixes     = ["10.0.2.0/24"]
@@ -27,12 +27,12 @@ resource "azurerm_subnet" "tfexample" {
 
 # Create a Network Interface
 resource "azurerm_network_interface" "tfexample" {
-  name                = "my-terraform-nic"
+  name                = "bala-terraform-nic"
   location            = azurerm_resource_group.tfexample.location
   resource_group_name = azurerm_resource_group.tfexample.name
 
   ip_configuration {
-    name                          = "my-terraform-nic-ip-config"
+    name                          = "bala-terraform-nic-ip-config"
     subnet_id                     = azurerm_subnet.tfexample.id
     private_ip_address_allocation = "Dynamic"
   }
@@ -40,7 +40,7 @@ resource "azurerm_network_interface" "tfexample" {
 
 # Create a Virtual Machine
 resource "azurerm_linux_virtual_machine" "tfexample" {
-  name                            = "my-terraform-vm"
+  name                            = "bala-terraform-vm"
   location                        = azurerm_resource_group.tfexample.location
   resource_group_name             = azurerm_resource_group.tfexample.name
   network_interface_ids           = [azurerm_network_interface.tfexample.id]
@@ -58,7 +58,7 @@ resource "azurerm_linux_virtual_machine" "tfexample" {
   }
 
   os_disk {
-    name                 = "my-terraform-os-disk"
+    name                 = "bala-terraform-os-disk"
     storage_account_type = "Standard_LRS"
     caching              = "ReadWrite"
   }
